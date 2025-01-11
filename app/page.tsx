@@ -119,18 +119,19 @@ export default function Page() {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
   const [attractions, setAttractions] = useState<Attraction[]>(initialAttractionsData)
+  // Removed: const [reviews, setReviews] = useState<number[]>(Array(initialAttractionsData.length).fill(0));
 
   const handleReviewIncrement = (index: number) => {
     setAttractions(currentAttractions => {
-      const newAttractions = [...currentAttractions]
-      const currentReviews = newAttractions[index].reviews
+      const newAttractions = [...currentAttractions];
+      const currentReviews = newAttractions[index].reviews;
       newAttractions[index] = {
         ...newAttractions[index],
         reviews: currentReviews >= 9999 ? 9999 : currentReviews + 1
-      }
-      return newAttractions
-    })
-  }
+      };
+      return newAttractions;
+    });
+  };
 
   const filteredAttractions = attractions.filter(attraction => {
     const matchesRating = selectedRating === 0 || attraction.rating >= selectedRating
@@ -189,13 +190,16 @@ export default function Page() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredAttractions.map((attraction, i) => (
-                  <AttractionCard 
-                    key={i} 
-                    {...attraction} 
-                    onImageClick={() => handleReviewIncrement(i)}
-                  />
-                ))}
+                {filteredAttractions.map((attraction, i) => {
+                  const originalIndex = attractions.findIndex(a => a.name === attraction.name);
+                  return (
+                    <AttractionCard 
+                      key={i} 
+                      {...attraction} 
+                      onImageClick={() => handleReviewIncrement(originalIndex)}
+                    />
+                  );
+                })}
               </div>
             )}
           </div>
@@ -204,4 +208,7 @@ export default function Page() {
     </div>
   )
 }
+
+
+
 

@@ -15,10 +15,10 @@ interface AttractionCardProps {
   category: string
   description?: string
   operatingHours?: string
-  onImageClick: () => void
   duration?: string;
   website?: string;
   phone?: string;
+  onImageClick?: () => void;
 }
 
 const categoryLabels: Record<string, { label: string, className: string }> = {
@@ -37,10 +37,10 @@ export function AttractionCard({
   category,
   description,
   operatingHours,
-  onImageClick,
   duration,
   website,
-  phone
+  phone,
+  onImageClick
 }: AttractionCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -55,6 +55,7 @@ export function AttractionCard({
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     setIsModalOpen(true)
+    onImageClick?.()
   }
 
   return (
@@ -134,4 +135,7 @@ export function AttractionCard({
     </>
   )
 }
+
+
+
 

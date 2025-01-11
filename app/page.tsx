@@ -121,7 +121,6 @@ export default function Page() {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
   const [attractions, setAttractions] = useState<Attraction[]>(initialAttractionsData)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const handleReviewIncrement = (index: number) => {
     setAttractions(currentAttractions => {

@@ -54,15 +54,26 @@ export function AttractionDetailModal({
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-hidden flex"
+        className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row"
         onClick={e => e.stopPropagation()}
       >
-        {/* Left Content */}
-        <div className="flex-1 p-6 overflow-y-auto">
+        {/* Image Section - Full width on mobile, side on desktop */}
+        <div className="w-full md:w-[45%] h-[300px] md:h-auto relative bg-gray-100">
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {/* Content Section */}
+        <div className="flex-1 p-4 md:p-6 overflow-y-auto">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <h2 className="text-2xl font-bold mb-2">{name}</h2>
-              <div className="flex items-center gap-2 mb-2">
+              <h2 className="text-xl md:text-2xl font-bold mb-2">{name}</h2>
+              <div className="flex flex-wrap items-center gap-2 mb-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -74,17 +85,17 @@ export function AttractionDetailModal({
                     />
                   ))}
                 </div>
-                <span className="text-sm text-gray-600">{reviews} views</span>
+                <span className="text-sm text-gray-600">{reviews} reviews</span>
                 <Badge variant="secondary" className={categoryInfo.className}>
                   {categoryInfo.label}
                 </Badge>
               </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="shrink-0">
                 <Share2 className="w-4 h-4" />
               </Button>
-              <Button variant="outline" size="icon" onClick={onClose}>
+              <Button variant="outline" size="icon" onClick={onClose} className="shrink-0">
                 <X className="w-4 h-4" />
               </Button>
             </div>
@@ -92,15 +103,14 @@ export function AttractionDetailModal({
 
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-gray-600">
-              <Clock className="w-4 h-4" />
+              <Clock className="w-4 h-4 shrink-0" />
               <span>{operatingHours || "Hours not available"}</span>
             </div>
             
             <div className="flex items-start gap-2 text-gray-600">
-              <MapPin className="w-4 h-4 mt-1" />
+              <MapPin className="w-4 h-4 mt-1 shrink-0" />
               <span>{location}</span>
             </div>
-
 
             <div>
               <h3 className="font-semibold text-lg mb-2">About</h3>
@@ -111,14 +121,14 @@ export function AttractionDetailModal({
             </div>
 
             {category === 'food' && phone && (
-  <div>
-    <h3 className="font-semibold text-lg mb-2">Contact</h3>
-    <div className="flex items-center gap-2 text-gray-600">
-      <Phone className="w-4 h-4" />
-      <span>{phone}</span>
-    </div>
-  </div>
-)}
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Contact</h3>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span>{phone}</span>
+                </div>
+              </div>
+            )}
 
             {category === 'hotels' && website && (
               <div>
@@ -129,7 +139,7 @@ export function AttractionDetailModal({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline"
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="w-4 h-4 shrink-0" />
                   Official Website
                 </a>
               </div>
@@ -143,21 +153,12 @@ export function AttractionDetailModal({
             )}
           </div>
         </div>
-
-        {/* Right Image */}
-        <div className="w-[45%] relative bg-gray-100">
-          <Image
-            src={imageUrl}
-            alt={name}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
       </div>
     </div>
   )
 }
+
+
 
 
 

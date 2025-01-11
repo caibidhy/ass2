@@ -18,7 +18,6 @@ interface AttractionCardProps {
   duration?: string;
   website?: string;
   phone?: string;
-  onImageClick?: () => void;
 }
 
 const categoryLabels: Record<string, { label: string, className: string }> = {
@@ -40,7 +39,6 @@ export function AttractionCard({
   duration,
   website,
   phone,
-  onImageClick
 }: AttractionCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -55,7 +53,6 @@ export function AttractionCard({
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     setIsModalOpen(true)
-    onImageClick?.()
   }
 
   return (
@@ -92,7 +89,7 @@ export function AttractionCard({
                 className={`w-4 h-4 ${i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
               />
             ))}
-            <span className="ml-2 text-sm text-gray-600">{formattedReviews} views</span>
+            <span className="ml-2 text-sm text-gray-600">{formattedReviews} reviews</span>
           </div>
           <div className="text-sm text-gray-600">{location}</div>
         </button>
@@ -135,6 +132,8 @@ export function AttractionCard({
     </>
   )
 }
+
+
 
 
 

@@ -121,7 +121,7 @@ export default function Page() {
   const [selectedRating, setSelectedRating] = useState<number>(0)
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
-  const [attractions, setAttractions] = useState<Attraction[]>(initialAttractionsData)
+  const [attractions] = useState<Attraction[]>(initialAttractionsData)
 
 
   const filteredAttractions = attractions.filter(attraction => {

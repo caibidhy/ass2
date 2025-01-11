@@ -7,6 +7,8 @@ import { AttractionCard } from "@/components/attraction-card"
 import { Montserrat } from 'next/font/google'
 import { useState } from 'react'
 import type { Attraction } from '@/types/attraction'
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
@@ -119,7 +121,7 @@ export default function Page() {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
   const [attractions, setAttractions] = useState<Attraction[]>(initialAttractionsData)
-  // Removed: const [reviews, setReviews] = useState<number[]>(Array(initialAttractionsData.length).fill(0));
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const handleReviewIncrement = (index: number) => {
     setAttractions(currentAttractions => {
@@ -155,17 +157,17 @@ export default function Page() {
   return (
     <div className={`min-h-screen bg-gray-50 ${montserrat.variable}`}>
       <Header />
-      <main className="container mx-auto px-8 py-8 max-w-[1400px]">
+      <main className="container mx-auto px-4 sm:px-6 py-8 max-w-[1400px]">
         <div className="max-w-4xl mx-auto text-center mb-8">
-          <h1 className="text-3xl font-bold mb-4 font-display bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4 font-display bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
             Things to Do in Penang Island
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Discover the best activities in Penang Island with our attractions guide.
           </p>
         </div>
 
-        <div className="relative mb-12 max-w-3xl mx-auto">
+        <div className="relative mb-8 max-w-3xl mx-auto">
           <input
             type="text"
             placeholder="Search attractions"
@@ -176,20 +178,46 @@ export default function Page() {
           <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
         </div>
 
-        <div className="flex gap-12 px-4">
-          <Sidebar 
-            onRatingChange={setSelectedRating} 
-            selectedRating={selectedRating}
-            onCategoryChange={handleCategoryChange}
-            selectedCategories={selectedCategories}
-          />
+        {/* Mobile Filter Button */}
+        <div className="lg:hidden mb-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="w-full">
+                Filters
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+              <div className="py-4">
+                <Sidebar 
+                  onRatingChange={setSelectedRating} 
+                  selectedRating={selectedRating}
+                  onCategoryChange={handleCategoryChange}
+                  selectedCategories={selectedCategories}
+                />
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="flex gap-8">
+          {/* Desktop Sidebar */}
+          <div className="hidden lg:block">
+            <Sidebar 
+              onRatingChange={setSelectedRating} 
+              selectedRating={selectedRating}
+              onCategoryChange={handleCategoryChange}
+              selectedCategories={selectedCategories}
+            />
+          </div>
+
+          {/* Main Content */}
           <div className="flex-1">
             {filteredAttractions.length === 0 ? (
               <div className="text-center text-gray-500 py-12">
                 No attractions found matching your criteria
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredAttractions.map((attraction, i) => {
                   const originalIndex = attractions.findIndex(a => a.name === attraction.name);
                   return (
@@ -208,6 +236,7 @@ export default function Page() {
     </div>
   )
 }
+
 
 
 

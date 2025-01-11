@@ -17,7 +17,7 @@ export function Sidebar({
   selectedCategories 
 }: SidebarProps) {
   return (
-    <div className="w-72 p-8">
+    <div className="w-full lg:w-72 p-4 lg:p-8">
       <h2 className="text-lg font-semibold mb-4">Filters</h2>
       
       <div className="space-y-6">
@@ -77,4 +77,6 @@ export function Sidebar({
     </div>
   )
 }
+
+
 

@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 export function Header() {
   return (
     <header className={`border-b ${montserrat.variable}`}>
-      <div className="container mx-auto px-8 h-16 flex items-center justify-between max-w-[1400px]">
+      <div className="container mx-auto px-8 h-16 flex items-center justify-between gap-4 max-w-[1400px]">
         <Link 
           href="/" 
           className="text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 bg-clip-text text-transparent font-display tracking-tight hover:scale-105 transition-transform duration-300 ease-in-out"
@@ -22,7 +22,7 @@ export function Header() {
         >
           TravellerWeb
         </Link>
-        <div className="flex items-center space-x-8 sm:space-x-10"> {/* Increased spacing */}
+        <div className="flex items-center space-x-4"> {/* Reduced spacing between nav items */}
           <Link 
             href="/" 
             className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -40,6 +40,8 @@ export function Header() {
     </header>
   )
 }
+
+
 
 
 

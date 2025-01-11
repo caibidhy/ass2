@@ -22,7 +22,7 @@ export function Header() {
         >
           TravellerWeb
         </Link>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-6 sm:space-x-8"> {/* Increased spacing */}
           <Link 
             href="/" 
             className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -40,4 +40,6 @@ export function Header() {
     </header>
   )
 }
+
+
 

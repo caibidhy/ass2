@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
+  weight: ['700'],
   variable: '--font-display'
 })
 
@@ -122,17 +123,6 @@ export default function Page() {
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
   const [attractions, setAttractions] = useState<Attraction[]>(initialAttractionsData)
 
-  const handleReviewIncrement = (index: number) => {
-    setAttractions(currentAttractions => {
-      const newAttractions = [...currentAttractions];
-      const currentReviews = newAttractions[index].reviews;
-      newAttractions[index] = {
-        ...newAttractions[index],
-        reviews: currentReviews >= 9999 ? 9999 : currentReviews + 1
-      };
-      return newAttractions;
-    });
-  };
 
   const filteredAttractions = attractions.filter(attraction => {
     const matchesRating = selectedRating === 0 || attraction.rating >= selectedRating
@@ -185,7 +175,7 @@ export default function Page() {
                 Filters
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-white">
               <div className="py-4">
                 <Sidebar 
                   onRatingChange={setSelectedRating} 
@@ -218,12 +208,10 @@ export default function Page() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredAttractions.map((attraction, i) => {
-                  const originalIndex = attractions.findIndex(a => a.name === attraction.name);
                   return (
                     <AttractionCard 
                       key={i} 
                       {...attraction} 
-                      onImageClick={() => handleReviewIncrement(originalIndex)}
                     />
                   );
                 })}
@@ -235,6 +223,10 @@ export default function Page() {
     </div>
   )
 }
+
+
+
+
 
 
 

@@ -74,7 +74,7 @@ export function AttractionDetailModal({
                     />
                   ))}
                 </div>
-                <span className="text-sm text-gray-600">{reviews} reviews</span>
+                <span className="text-sm text-gray-600">{reviews} views</span>
                 <Badge variant="secondary" className={categoryInfo.className}>
                   {categoryInfo.label}
                 </Badge>
@@ -158,4 +158,6 @@ export function AttractionDetailModal({
     </div>
   )
 }
+
+
 

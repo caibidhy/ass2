@@ -92,7 +92,7 @@ export function AttractionCard({
                 className={`w-4 h-4 ${i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
               />
             ))}
-            <span className="ml-2 text-sm text-gray-600">{formattedReviews} reviews</span>
+            <span className="ml-2 text-sm text-gray-600">{formattedReviews} views</span>
           </div>
           <div className="text-sm text-gray-600">{location}</div>
         </button>
@@ -135,6 +135,8 @@ export function AttractionCard({
     </>
   )
 }
+
+
 
 
 
